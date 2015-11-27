@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+apply plugin: 'checkstyle'
+
+android {
+
+  //signingConfigs {
+  //release {
+  //storeFile file(RELEASE_STORE_FILE)
+  //storePassword RELEASE_STORE_PASSWORD
+  //keyAlias RELEASE_KEY_ALIAS
+  //keyPassword RELEASE_KEY_PASSWORD
+  //}
+  //}
+
+  compileSdkVersion 23
+  buildToolsVersion "23.0.2"
+  defaultConfig {
+    minSdkVersion 14
+    targetSdkVersion 23
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      //signingConfig signingConfigs.release
+    }
+  }
+  packagingOptions {
+    exclude 'META-INF/services/javax.annotation.processing.Processor'
+  }
+}
+
+dependencies {
+  compile 'com.github.jorgecastilloprz:fabprogresscircle:1.01@aar'
+  compile 'com.android.support:appcompat-v7:23.1.0'
+  compile 'com.android.support:design:23.1.0'
+  compile 'com.squareup.picasso:picasso:2.5.2'
+}
+
+task checkstyle(type: Checkstyle) {
+  configFile file('../config/checkstyle/checkstyle.xml')
+  source 'src'
+  include '**/*.java'
+  exclude '**/gen/**'
+
+  classpath = files()
+}

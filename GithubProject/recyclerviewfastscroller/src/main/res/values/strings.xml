@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="element_text">Element</string>
+    <string name="menu_item_simple_list">Simple List</string>
+    <string name="menu_item_section_indexer_list">List With Section Indicator</string>
+</resources>

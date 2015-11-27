@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile project(':SwipeBackLayoutLibrary')
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 23
+    }
+
+    signingConfigs {
+        signing
+    }
+
+    buildTypes {
+        release {
+            if (project.hasProperty('storeFile')) {
+                signingConfig signingConfigs.signing
+            }
+        }
+    }
+}
+
+if (project.hasProperty('storeFile')) {
+    android.signingConfigs.signing.storeFile = file(storeFile)
+}
+
+if (project.hasProperty('storePassword')) {
+    android.signingConfigs.signing.storePassword = storePassword
+}
+
+if (project.hasProperty('keyAlias')) {
+    android.signingConfigs.signing.keyAlias = keyAlias
+}
+
+if (project.hasProperty('keyPassword')) {
+    android.signingConfigs.signing.keyPassword = keyPassword
+}
